@@ -182,25 +182,156 @@ import java.util.*;
 //     }
 // }
 
+// public class main{
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+//         int t = sc.nextInt();
+//         int k = sc.nextInt();
+//         int[] colors = new int[t];
+//         for(int i = 0; i < t; i++) {
+//             colors[i] = sc.nextInt();
+//         }
+//         int count = 0;
+//         for (int i = 0; i < colors.length; i++) {
+//             for (int j = 0; j < k; j++) {
+//                 if(colors[] != colors[i-1] && colors[i] != colors[i+1]){
+//                     count += 1;
+//                 }
+//             }
+            
+//         }
+//         System.out.println(count);
+
+//     }
+// }
+
+// public class main{
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+//         int t = sc.nextInt();
+//         for (int i = 0; i < t; i++) {
+//             int x = sc.nextInt();
+//             int counter = 0;
+//             long n = 2;
+//             while (counter == 0) {
+//                 if(x >= n){
+//                     n = n*n;
+//                 }else{
+//                     counter = 1;
+//                     break;
+//                 }
+//             }
+//             System.out.println(x - (n-x));
+
+//         }
+//     }
+// }
+
+// public class main{
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+//         int n = sc.nextInt();
+//         int[] arr = new int[n];
+//         int ex = sc.nextInt();
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+//         // find the max number in array
+//         int max = arr[0];
+//         for (int i = 0; i < arr.length; i++) {
+//             if (arr[i] > max) {
+//                 max = arr[i];
+//                 }
+//         }
+//         List<Boolean> result = new ArrayList<Boolean>();
+//         for (int i = 0; i < n; i++) {
+//             if(arr[i]+ex > max){
+//                 result.add(true);
+//             }else{
+//                 result.add(false);
+//             }
+//         }
+//         return result;
+
+
+//     }
+// }
+
 public class main{
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        int k = sc.nextInt();
-        int[] colors = new int[t];
-        for(int i = 0; i < t; i++) {
-            colors[i] = sc.nextInt();
+
+    public static int point = 0;
+
+    public static void max(String s , int x , int y ){
+        if(s.length() == 1 || s.length() == 0){
+            return;
         }
-        int count = 0;
-        for (int i = 0; i < colors.length; i++) {
-            for (int j = 0; j < k; j++) {
-                if(colors[] != colors[i-1] && colors[i] != colors[i+1]){
-                    count += 1;
+        if(s.length() == 2 && s.charAt(1) != 'a' && s.charAt(0) != 'b' && s.charAt(1) != 'b'){
+            return;
+        }
+        int counter = 0;
+        if(x>y){
+            if(counter == 0){
+
+                for(int i = 0 ; i < s.length() -1; i++){
+                    if(s.charAt(i) == 'a' && s.charAt(i+1) == 'b'){
+                        // s.charAt(i) = '';
+                        s = s.substring(0,i) + s.substring(i+2,s.length());
+                        max(s, x, y);
+                        point += x;
+                        counter = 1;
+                        break;
+                    }
                 }
             }
-            
-        }
-        System.out.println(count);
+            if(counter == 0){
 
+                for(int i = 0 ; i < s.length() -1 ; i++){
+                    if(s.charAt(i) == 'b' && s.charAt(i+1) == 'a'){
+                        // s.charAt(i) = '';
+                        s = s.substring(0,i) + s.substring(i+2,s.length());
+                        max(s, x, y);
+                        point += y;
+                        counter = 1;
+                        break;
+                    }
+                }
+            }
+        }else{
+            if(counter == 0){
+            for(int i = 0 ; i < s.length()-1; i++){
+                if(s.charAt(i) == 'b' && s.charAt(i+1) == 'a'){
+                    // s.charAt(i) = '';
+                    s = s.substring(0,i) + s.substring(i+2,s.length());
+                    max(s, x, y);
+                    point += y;
+                    counter = 1;
+                    break;
+                }
+            }
+            }
+            if(counter == 0){
+            for(int i = 0 ; i < s.length()-1 ; i++){
+                if(s.charAt(i) == 'a' && s.charAt(i+1) == 'b'){
+                    // s.charAt(i) = '';
+                    s = s.substring(0,i) + s.substring(i+2,s.length());
+                    max(s, x, y);
+                    point += x;
+                    counter = 1;
+                    break;
+                }
+            }
+        }
+        }
+
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+        max(s, x, y );
+        int ans =  point;
+        point = 0;
+        System.out.println(ans);
     }
 }
